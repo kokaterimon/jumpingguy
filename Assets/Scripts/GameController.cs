@@ -19,15 +19,23 @@ public class GameController : MonoBehaviour{
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update() {
 
-        if(Input.GetKeyDown("up") || Input.GetMouseButtonDown(0))
+        if (gameState == GameState.Idle && (Input.GetKeyDown("up") || Input.GetMouseButtonDown(0)))
         {
             gameState = GameState.Playing;
         }
 
-        float finalSpeed = parallaxSpeed * Time.deltaTime;
-        background.uvRect = new Rect(background.uvRect.x + finalSpeed, 0f, 1f, 1f);
-        platfrom.uvRect = new Rect(platfrom.uvRect.x + finalSpeed * 4, 0f, 1f, 1f);
+        else if (gameState == GameState.Playing)
+        {
+            Parallax();
+        }
+
+        void Parallax()
+        {
+           float finalSpeed = parallaxSpeed * Time.deltaTime;
+           background.uvRect = new Rect(background.uvRect.x + finalSpeed, 0f, 1f, 1f);
+           platfrom.uvRect = new Rect(platfrom.uvRect.x + finalSpeed * 4, 0f, 1f, 1f);
+        }
     }
 }
