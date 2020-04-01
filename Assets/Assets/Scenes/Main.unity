@@ -444,6 +444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25e8468c00941f4b8860941b5b5e341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parallaxSpeed: 0.02
+  background: {fileID: 282283637}
+  platfrom: {fileID: 1676983808}
 --- !u!1 &1485513256
 GameObject:
   m_ObjectHideFlags: 0
