@@ -20,4 +20,9 @@ public class Enemycontroller : MonoBehaviour{
     {
         
     }
+
+    void OnTriggerEnter2D()
+    {
+        Destroy(gameObject);
+    }
 }
