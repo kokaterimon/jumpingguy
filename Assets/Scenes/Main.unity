@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 430192729}
   m_Layer: 0
   m_Name: EnemyDestroyer
-  m_TagString: Untagged
+  m_TagString: Destroyer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
