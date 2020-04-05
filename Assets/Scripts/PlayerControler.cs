@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour{
 
-    private Animator animator;
+    public GameObject game;
+    public GameObject enemyGenerator;
 
+    private Animator animator;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +18,8 @@ public class PlayerControler : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("up") || Input.GetMouseButtonDown(0))
+        bool gamePlaying = game.GetComponent<GameController>().gameState == GameState.Playing;
+        if (gamePlaying && (Input.GetKeyDown("up") || Input.GetMouseButtonDown(0)))
         {
             UpdateState("PlayerJump");
         }
@@ -28,4 +32,15 @@ public class PlayerControler : MonoBehaviour{
             animator.Play(state);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            UpdateState("PlayerDie");
+            game.GetComponent<GameController>().gameState = GameState.Ended;
+            enemyGenerator.SendMessage("CancelGenerator", true);
+        }
+    }
 }
+

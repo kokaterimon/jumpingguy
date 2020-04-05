@@ -29,8 +29,16 @@ public class EnemyGeneratorController : MonoBehaviour{
         InvokeRepeating("CreateEnemy", 0f, generatorTimer);
     }
 
-    public void CancelGenerator()
+    public void CancelGenerator(bool clean = false)
     {
         CancelInvoke("CreateEnemy");
+        if (clean)
+        {
+            object[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject enemy in allEnemies)
+            {
+                Destroy(enemy);
+            }
+        }
     }
 }
