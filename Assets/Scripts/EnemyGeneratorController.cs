@@ -12,7 +12,7 @@ public class EnemyGeneratorController : MonoBehaviour{
     {
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {
