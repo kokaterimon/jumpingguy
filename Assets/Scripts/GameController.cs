@@ -12,7 +12,9 @@ public class GameController : MonoBehaviour {
     public float parallaxSpeed = 0.02f;
     public RawImage background;
     public RawImage platfrom;
-    public GameObject uiIdle;    
+    public GameObject uiIdle;
+    public GameObject uiScore;
+    public Text pointsText;
     public GameState gameState = GameState.Idle;
 
     public GameObject player;
@@ -22,6 +24,7 @@ public class GameController : MonoBehaviour {
     public float scaleInc = .25f;
 
     private AudioSource musicPlayer;
+    private int points = 0;
 
     // Start is called before the first frame update
     void Start() {
@@ -33,21 +36,24 @@ public class GameController : MonoBehaviour {
 
         bool userAction = Input.GetKeyDown("up") || Input.GetMouseButtonDown(0);
 
+        //Empieza el juego
         if (gameState == GameState.Idle && userAction)
         {
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
+            uiScore.SetActive(true);
             player.SendMessage("UpdateState", "PlayerRun");
+            player.SendMessage("DustPlay");
             enemyGenerator.SendMessage("StartGenerator");
             musicPlayer.Play();
             InvokeRepeating("GameTimeScale", scaleTime, scaleTime);
         }
-
+        //Juego en marcha
         else if (gameState == GameState.Playing)
         {
             Parallax();
         }
-
+        //Juego preparado para reiniciarse
         else if (gameState == GameState.Ready)
         {
             if (userAction)
@@ -80,5 +86,11 @@ public class GameController : MonoBehaviour {
         CancelInvoke("GameTimeScale");
         Time.timeScale = 1f;
         Debug.Log("Ritmo restablecido: " + Time.timeScale.ToString());
+    }
+
+    public void IncreasePoints()
+    {
+        points++;
+        pointsText.text = (++points).ToString();
     }
 }
