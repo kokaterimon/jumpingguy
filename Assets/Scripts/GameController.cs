@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour {
     public float scaleInc = .25f;
 
     private AudioSource musicPlayer;
-    private int points = 0;
+    private int points = 1;
 
     // Start is called before the first frame update
     void Start() {
