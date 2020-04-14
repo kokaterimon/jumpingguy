@@ -82,5 +82,4 @@ public class PlayerControler : MonoBehaviour{
     {
         dust.Stop();
     }
-
 }
